@@ -1,6 +1,7 @@
 package com
 
 
+import android.util.Log
 import android.util.Log.e
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,20 +22,27 @@ class WeatherViewModel : ViewModel() {
         _weatherResult.value = NetworkResponse.Loading
         viewModelScope.launch {
             try{
-            val response = weatherApi.getWeather(Constant.apiKey, city)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _weatherResult.value = NetworkResponse.Success(it)
-                }
-            } else {
-                _weatherResult.value = NetworkResponse.Error("Failed to load data")
+                val response = weatherApi.getWeather(Constant.apiKey, city)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _weatherResult.value = NetworkResponse.Success(it)
+                    }
+                } else {
+
+                        // This will show you the HTTP error code and message
+                        Log.e("API_CALL", "HTTP Error: ${response.code()}, ${response.message()}")
+                        _weatherResult.value = NetworkResponse.Error("Failed to load data: ${response.code()}")
+                    }
+
+
 
             }
+            catch(e : Exception) {
+                    // This will show you the exact error, like "UnknownHostException"
+                    Log.e("API_CALL", "Failed to fetch data: ${e.message}")
+                    _weatherResult.value = NetworkResponse.Error("Failed to load data")
 
+            }
         }
-    catch(e : Exception) {
-        _weatherResult.value = NetworkResponse.Error("Failed to load data")
     }
-}
-}
 }
