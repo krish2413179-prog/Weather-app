@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -56,12 +56,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    // retrofit
-    implementation("com.squareup.retrofit2:retrofit:3.0.0")
-// GSON
-    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-// coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("androidx.compose.runtime:runtime-livedata:1.9.0")
+
+    // Retrofit (Latest stable version is 2.9.0)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // GSON Converter (aligned with Retrofit version)
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Coroutines (Use a more recent stable version like 1.8.0)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+
+    // LiveData to Compose Integration (aligned with BOM)
+    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 }
