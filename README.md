@@ -25,7 +25,7 @@ The UI adapts based on the current state of the weather data fetch.
 
 | State       | Description                                                                 | Screenshot Preview                                                      |
 | ----------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **Initial** | The default view when the app is first opened, prompting the user for input. | ``                        |
+| **Initial** | The default view when the app is first opened, prompting the user for input. | ``<img width="1344" height="2992" alt="Image" src="https://github.com/user-attachments/assets/50e1e90f-a133-43c7-a9ed-bc0390d9ffc6" />                        |
 | **Loading** | Shown after the user presses "Search", while the data is being fetched.       | ``                              |
 | **Success** | The main view displaying all the fetched weather data for the searched city.  | ``                     |
 | **Error** | Displayed if the city is not found or if there is a network error.          | ``                     |
