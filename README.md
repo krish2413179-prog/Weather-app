@@ -25,14 +25,11 @@ The UI adapts based on the current state of the weather data fetch.
 
 | State       | Description                                                                 | Screenshot Preview                                                      |
 | ----------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **Initial** | The default view when the app is first opened, prompting the user for input. | ``<img width="1344" height="2992" alt="Image" src="https://github.com/user-attachments/assets/50e1e90f-a133-43c7-a9ed-bc0390d9ffc6" />                        |
-| **Loading** | Shown after the user presses "Search", while the data is being fetched.       | ``                              |
-| **Success** | The main view displaying all the fetched weather data for the searched city.  | ``                     |
-| **Error** | Displayed if the city is not found or if there is a network error.          | ``                     |
+| **Initial** | The default view when the app is first opened, prompting the user for input. | ``<img width="200" height="400" alt="Image" src="https://github.com/user-attachments/assets/50e1e90f-a133-43c7-a9ed-bc0390d9ffc6" />                        |
+| **Success** | The main view displaying all the fetched weather data for the searched city.  | ``       <img width="200" height="400" alt="Image" src="https://github.com/user-attachments/assets/f0a8de69-6119-4adf-88ed-1dffb5f7a90c" />  |
+| **Error** | Displayed if the city is not found or if there is a network error.          | ``      <img width="200" height="400" alt="Image" src="https://github.com/user-attachments/assets/67bdbc1d-7c54-4ad6-a058-f68e7c13782a" />               |
 
-*(Note: Replace the bracketed text with actual image URLs or paths in your repository.)*
 
----
 
 ## 🛠️ Code Breakdown
 
@@ -60,20 +57,5 @@ This composable is responsible for displaying all the weather information when t
 
 ---
 
-## ⚙️ Dependencies & Assumptions
 
-This UI code assumes the following components are available in the project:
-
-1.  **`WeatherViewModel`**: A ViewModel that exposes a `LiveData<NetworkResponse<WeatherModel>>` named `weatherResult` and contains the `getData(city: String)` method.
-2.  **`NetworkResponse` Sealed Class**: A wrapper class to represent the different states of a network request (e.g., `Loading`, `Success`, `Error`).
-3.  **API Data Models**: Kotlin data classes (`WeatherModel`, `ForecastDay`, etc.) that match the structure of the weather API's JSON response.
-4.  **Drawable Resources**: The project must have the required vector drawables in the `res/drawable` folder (e.g., `ic_sunny.xml`, `ic_cloudy.xml`, etc.).
-
----
-
-
-
-        // Call the main composable
-        WeatherPage(viewModel = weatherViewModel)
-    }
 }
