@@ -1,47 +1,42 @@
 package com
 
-
-import android.util.Log
-import android.util.Log.e
+import WeatherApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.api.Constant
-import com.api.NetworkResponse
 
+import com.api.NetworkResponse
 import com.api.RetrofitInstance
 import com.api.WeatherModel
 import kotlinx.coroutines.launch
 
 class WeatherViewModel : ViewModel() {
-    private val weatherApi = RetrofitInstance.weatherApi
+    private val weatherApi: WeatherApi = RetrofitInstance.api
     private val _weatherResult = MutableLiveData<NetworkResponse<WeatherModel>>()
     val weatherResult : LiveData<NetworkResponse<WeatherModel>> = _weatherResult
+
     fun getData(city : String){
         _weatherResult.value = NetworkResponse.Loading
         viewModelScope.launch {
             try{
-                val response = weatherApi.getWeather(Constant.apiKey, city)
+                // The API key should be handled securely, e.g., via BuildConfig
+                val response = weatherApi.getWeather(
+                    apiKey = "c2b4c4ca452049c48fc133541251808",
+                    city = city,
+                    days = 7 // This is the required change
+                )
+
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _weatherResult.value = NetworkResponse.Success(it)
                     }
                 } else {
-
-                        // This will show you the HTTP error code and message
-                        Log.e("API_CALL", "HTTP Error: ${response.code()}, ${response.message()}")
-                        _weatherResult.value = NetworkResponse.Error("Failed to load data: ${response.code()}")
-                    }
-
-
-
+                    _weatherResult.value = NetworkResponse.Error("Failed to load data: ${response.message()}")
+                }
             }
             catch(e : Exception) {
-                    // This will show you the exact error, like "UnknownHostException"
-                    Log.e("API_CALL", "Failed to fetch data: ${e.message}")
-                    _weatherResult.value = NetworkResponse.Error("Failed to load data")
-
+                _weatherResult.value = NetworkResponse.Error("Failed to load data: ${e.message}")
             }
         }
     }
