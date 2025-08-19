@@ -96,7 +96,7 @@ fun WeatherDetails(data: WeatherModel) {
             .padding(vertical = 16.dp),
              horizontalAlignment = Alignment.Start
     ) {
-        // Safely convert the temp_c string to a number, then round it
+     
         val temp = data.current.temp_c.toDoubleOrNull()?.roundToInt() ?: 0
         Text(
             text = "$temp°C",
@@ -139,11 +139,10 @@ fun WeatherDetails(data: WeatherModel) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            // Safely convert the precip_mm string to a number for formatting
+           
             val precipitationValue = data.current.precip_mm.toDoubleOrNull() ?: 0.0
             val precipitationText = String.format(Locale.US, "%.1f mm", precipitationValue)
 
-            // Safely convert the wind_kph string to a number, then round it
             val windValue = data.current.wind_kph.toDoubleOrNull()?.roundToInt() ?: 0
 
             Text(text = "Precipitation: $precipitationText", fontSize = 16.sp)
