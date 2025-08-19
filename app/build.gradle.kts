@@ -68,5 +68,4 @@ dependencies {
 
     // LiveData to Compose Integration (aligned with BOM)
     implementation("androidx.compose.runtime:runtime-livedata")
-    implementation("io.coil-kt:coil-compose:2.7.0")
 }
