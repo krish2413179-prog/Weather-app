@@ -20,11 +20,11 @@ class WeatherViewModel : ViewModel() {
         _weatherResult.value = NetworkResponse.Loading
         viewModelScope.launch {
             try{
-                // The API key should be handled securely, e.g., via BuildConfig
+               
                 val response = weatherApi.getWeather(
                     apiKey = "c2b4c4ca452049c48fc133541251808",
                     city = city,
-                    days = 7 // This is the required change
+                    days = 7 
                 )
 
                 if (response.isSuccessful) {
